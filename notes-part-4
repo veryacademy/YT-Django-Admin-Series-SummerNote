@@ -1,0 +1,40 @@
+#Part 1
+######
+#admin.site.register(Post)
+#admin.site.unregister(Post)
+#admin.site.register(Category)
+######
+
+
+#Part 2
+######
+# class PostAdmin(admin.ModelAdmin):
+#     fields = ['title', 'author']
+
+# admin.site.register(Post, PostAdmin)
+######
+
+# from django.apps import apps
+import django.apps
+#admin.site.unregister(model)
+
+#The register decorator
+@admin.register(models.Post)
+class PostAdmin(admin.ModelAdmin):
+     fields = ['title', 'author']
+
+#admin.site.register(Post, PostAdmin)
+
+#Part 3
+######
+
+models = django.apps.apps.get_models()
+print(models)
+
+for model in models:
+    try:
+        admin.site.register(model)
+    except admin.sites.AlreadyRegistered:
+        pass
+
+#admin.site.unregister(django.contrib.auth.models.Group)

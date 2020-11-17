@@ -1,0 +1,100 @@
+#fields
+##########
+    fields = ['category','title','author','content']
+
+    #Group same line
+    fields = ['category','title',('publish','author'),('content','excerpt')]
+
+# fieldsets
+##########
+    """
+    Custom Text
+    """
+    TEXT = ' '.join(['Here is some multi-line help',
+                                'which is a long string so put',
+                                'into a list which is then joined',
+                                'with spaces. I can do fun things',
+                                'like have <strong>bold</strong>',
+                                'and some line breaks.'])
+
+    fieldsets = (
+        ('Main Section', {
+            'fields': ('title', 'author', 'publish')
+        }),
+
+        ('Second Section', {
+            'fields': ('content', 'excerpt', 'slug'),
+            'description': '%s' % TEXT,
+        }),
+        ('Advanced options', {
+            'classes': ('collapse',),
+            'fields': ('status',),
+        }),
+    )
+
+#Help Text
+###############
+
+In model
+help_text="Make it a good title."
+
+
+
+
+
+
+##################
+
+
+class MyForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(MyForm, self).__init__(*args, **kwargs)
+        self.fields['title'].help_text = 'My help text'
+        self.fields['category'].help_text = 'Select a category'
+
+    class Meta:
+        model = Post
+        exclude = ('slug',)
+
+
+class MyModelAdmin(admin.ModelAdmin):
+    form = MyForm
+
+admin.site.register(Post, MyModelAdmin)
+
+
+
+# """
+# Custom Text
+# """
+# TEXT = ' '.join(['Here is some multi-line help',
+#                               'which is a long string so put',
+#                               'into a list which is then joined',
+#                               'with spaces. I can do fun things',
+#                               'like have <strong>bold</strong>',
+#                               'and some line breaks.'])
+
+
+# class PostAdmin(admin.ModelAdmin):
+#     pass
+#      #fields = ['category','title','author','content']
+#      #fields = ['category','title',('publish','author'),('content','excerpt')]
+
+
+#     fieldsets = (
+#         ('Main Section', {
+#             'fields': ('title', 'author', 'publish')
+#         }),
+
+#         ('Second Section', {
+#             'fields': ('content', 'excerpt', 'slug'),
+#             'description': '%s' % TEXT,
+#         }),
+#         ('Advanced options', {
+#             'classes': ('collapse',),
+#             'fields': ('status',),
+#         }),
+#     )
+
+
+# admin.site.register(Post, PostAdmin)

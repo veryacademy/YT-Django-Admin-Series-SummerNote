@@ -1,0 +1,12 @@
+#from blog.admin import blog_site
+#from bookstore.admin import bookstore_site
+#path('blogadmin/', blog_site.urls),
+#path('bookstoreadmin/', bookstore_site.urls),
+#admin.site.index_title = "The Bookstore" 
+#admin.site.site_header = "The Bookstore Admin"
+#admin.site.site_title = "Site Title Bookstore"
+
+
+
+python manage.py findstatic --verbosity 2 css/styles.css
+python manage.py findstatic --verbosity 2 login.css
